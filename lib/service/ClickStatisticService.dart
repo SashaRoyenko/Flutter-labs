@@ -18,18 +18,46 @@ class ClickStatisticService {
     collection.save(parameterMap);
   }
 
-  Future<List<ClickStatistic>> getAll()  async {
-    Db _db = await _dbConnection.getConnection();
-    var collection = _db.collection(_COLLECTION_NAME);
-    return collection.find(where.sortBy('dateTime', descending: true)).map((element) {
-      Color backgroundColor =
-          _colorService.getColorFromHex(element["backgroundColor"]);
-      Color buttonColor = _colorService.getColorFromHex(element["buttonColor"]);
-      var clickStatistic = ClickStatistic(backgroundColor, buttonColor, element["dateTime"]);
-      clickStatistic.id = element["_id"];
-      return clickStatistic;
-    }).toList();
+  Future<List<ClickStatistic>> getAll1()  async {
+    try {
+      Db _db = await _dbConnection.getConnection();
+      var collection = _db.collection(_COLLECTION_NAME);
+      return collection.find(where.sortBy('dateTime', descending: true)).map((
+          element) {
+        Color backgroundColor =
+        _colorService.getColorFromHex(element["backgroundColor"]);
+        Color buttonColor = _colorService.getColorFromHex(
+            element["buttonColor"]);
+        var clickStatistic = ClickStatistic(
+            backgroundColor, buttonColor, element["dateTime"]);
+        clickStatistic.id = element["_id"];
+        return clickStatistic;
+      }).toList();
+    } catch(e)  {
+      print("Error here!");
+      return Future.value(List.empty());
+    }
+  }
 
+  Future<List<ClickStatistic>> getAll()  {
+    return _dbConnection.getConnection().then((value) {
+      var collection = value.collection(_COLLECTION_NAME);
+      return collection
+          .find(where.sortBy('dateTime', descending: true))
+          .map((element) {
+        Color backgroundColor =
+        _colorService.getColorFromHex(element["backgroundColor"]);
+        Color buttonColor =
+        _colorService.getColorFromHex(element["buttonColor"]);
+        var clickStatistic =
+        ClickStatistic(backgroundColor, buttonColor, element["dateTime"]);
+        clickStatistic.id = element["_id"];
+        return clickStatistic;
+      }).toList();
+    }).catchError((error, stackTrace) {
+      print("Error here!");
+      return Future.value(List.empty());
+    });
   }
 
   void delete(ObjectId id) async {

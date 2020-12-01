@@ -3,7 +3,7 @@ class DBConnection {
 
   static DBConnection _instance;
 
-  static final String _host = "";
+  static final String _host = "myclaster-shard-00-00.qe5xc.mongodb.net";
   static final String _port = "27017";
   static final String _dbName = "flutter";
   static final String _dbUser = "admin";

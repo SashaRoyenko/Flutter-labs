@@ -30,11 +30,19 @@ class _BottomNavigationState extends State<BottomNavigation>{
       items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          title: Text('Home'),
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.filter_drama),
-          title: Text('Data from db'),
+          label: 'Data from db',
+        ),
+//        BottomNavigationBarItem(
+//          icon: Icon(Icons.bar_chart),
+//          label: 'Charts',
+//        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.image_search),
+          label: 'Images',
         ),
       ],
       selectedItemColor: Colors.blue[800],

@@ -3,6 +3,8 @@ import 'package:flutter_app_1/pages/parts/BottomNavigation.dart';
 import 'package:flutter_app_1/pages/parts/Button.dart';
 import 'package:flutter_app_1/pages/statistic/StatisticPage.dart';
 
+import '../images_page.dart';
+
 class HomePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _HomePageState();
@@ -24,7 +26,9 @@ class _HomePageState extends State<HomePage> {
             notifyParent: _changeColor,
         ),
       ),
-      Container(child: StatisticPage())
+      Container(child: StatisticPage()),
+//      Text("Chart"),
+      ImagesFromNetwork()
     ];
 
     return Scaffold(
